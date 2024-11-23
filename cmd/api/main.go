@@ -64,7 +64,7 @@ func startServer(router *gin.Engine) {
 	}
 	err := http2.ConfigureServer(server, nil)
 	if err != nil {
-		logrus.Errorf("Error while configuring http2", err)
+		logrus.Errorf("Error while configuring http", err)
 		return
 	}
 	go func() {
