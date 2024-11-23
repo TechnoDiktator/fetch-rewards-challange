@@ -17,6 +17,7 @@ type MemoryStore struct {
 func NewMemoryStore() ReceiptStore {
 	logrus.Infof("Getting In Memory Store")
 	return &MemoryStore{
+		mu:       sync.Mutex{},
 		receipts: make(map[string]storemodels.Receipt),
 	}
 }
