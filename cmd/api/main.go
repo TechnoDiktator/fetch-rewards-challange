@@ -74,7 +74,7 @@ func startServer(router *gin.Engine) {
 			return
 		}
 	}()
-	logrus.Errorf("Server listening at %s", constants.PORT)
+	logrus.Infof("Server listening at %s", constants.PORT)
 	Gracefullstop(server)
 
 }
