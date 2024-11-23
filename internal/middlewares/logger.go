@@ -7,7 +7,7 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-// LogRequest is a middleware that logs incoming requests using logrus
+// LogRequest is a middleware that logs incoming requests
 func LogRequest(c *gin.Context) {
 	logrus.WithFields(logrus.Fields{
 		"method": c.Request.Method,
