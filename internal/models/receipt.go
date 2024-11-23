@@ -1,10 +1,6 @@
 package models
 
 import (
-	"github.com/TechnoDiktator/fetch-rewards-challange/pkg/logger"
-	"math"
-	"strconv"
-	"strings"
 	"time"
 )
 
