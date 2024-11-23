@@ -7,7 +7,6 @@ import (
 )
 
 // GetPoints handles GET /receipts/{id}/points
-
 func (h *ReceiptHandler) GetPoints(c *gin.Context) {
 	id := c.Param("id")
 
