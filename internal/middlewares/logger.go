@@ -1,4 +1,4 @@
-// internal/middleware/request_logger.go
+// internal/middleware/logger.go
 
 package middleware
 

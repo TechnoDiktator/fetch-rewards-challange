@@ -7,6 +7,7 @@ import (
 	"github.com/TechnoDiktator/fetch-rewards-challange/internal/repository"
 	"github.com/TechnoDiktator/fetch-rewards-challange/internal/services"
 	"github.com/TechnoDiktator/fetch-rewards-challange/internal/utils/constants"
+	"github.com/TechnoDiktator/fetch-rewards-challange/pkg/logger"
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
 	"golang.org/x/net/http2"
@@ -20,6 +21,7 @@ import (
 func main() {
 
 	// Set up signal handling to gracefully shut down
+	logger.InitializeLogger()
 	stop := make(chan os.Signal, 1)
 	signal.Notify(stop, os.Interrupt)
 
