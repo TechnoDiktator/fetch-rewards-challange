@@ -1,4 +1,4 @@
-package db
+package inmemorydb
 
 import (
 	"github.com/TechnoDiktator/fetch-rewards-challange/internal/models/storemodels"
