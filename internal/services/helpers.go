@@ -2,7 +2,7 @@ package services
 
 import (
 	"fmt"
-	"github.com/TechnoDiktator/fetch-rewards-challange/internal/models"
+	"github.com/TechnoDiktator/fetch-rewards-challange/internal/models/storemodels"
 	"github.com/TechnoDiktator/fetch-rewards-challange/pkg/logger"
 	"github.com/sirupsen/logrus"
 	"math"
@@ -11,7 +11,8 @@ import (
 	"time"
 )
 
-func (s *ReceiptServiceImpl) ProcessReceipt(receipt models.Receipt) (string, error) {
+// ProcessReceipt adds the incoming receipt into the inmemory store the request is already validated
+func (s *ReceiptServiceImpl) ProcessReceipt(receipt storemodels.Receipt) (string, error) {
 
 	logger.Log.WithFields(logrus.Fields{
 		"retailer": receipt.Retailer,
@@ -28,6 +29,7 @@ func (s *ReceiptServiceImpl) ProcessReceipt(receipt models.Receipt) (string, err
 
 }
 
+// GetPoints gets the points for the receipt present in the inmemory store
 func (s *ReceiptServiceImpl) GetPoints(id string) (int, error) {
 
 	logger.Log.WithFields(logrus.Fields{
@@ -53,7 +55,7 @@ func (s *ReceiptServiceImpl) GetPoints(id string) (int, error) {
 }
 
 // Points Calculation Methods
-func (s *ReceiptServiceImpl) CalculateRetailerPoints(receipt models.Receipt) int {
+func (s *ReceiptServiceImpl) CalculateRetailerPoints(receipt storemodels.Receipt) int {
 	logrus.Infof("Calculating points based on retailer: %s", receipt.Retailer)
 	points := 0
 	for _, c := range receipt.Retailer {
@@ -69,7 +71,7 @@ func isAlphanumeric(c rune) bool {
 	return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9')
 }
 
-func (s *ReceiptServiceImpl) CalculateTotalIsRoundDollar(receipt models.Receipt) int {
+func (s *ReceiptServiceImpl) CalculateTotalIsRoundDollar(receipt storemodels.Receipt) int {
 	logrus.Infof("Checking if total is a round dollar: %s", receipt.Total)
 	points := 0
 	total, err := strconv.ParseFloat(receipt.Total, 64)
@@ -82,7 +84,7 @@ func (s *ReceiptServiceImpl) CalculateTotalIsRoundDollar(receipt models.Receipt)
 	return points
 }
 
-func (s *ReceiptServiceImpl) CalculateTotalMultipleOfQuarter(receipt models.Receipt) int {
+func (s *ReceiptServiceImpl) CalculateTotalMultipleOfQuarter(receipt storemodels.Receipt) int {
 	logrus.Infof("Checking if total is a multiple of 0.25: %s", receipt.Total)
 	points := 0
 	total, err := strconv.ParseFloat(receipt.Total, 64)
@@ -95,7 +97,7 @@ func (s *ReceiptServiceImpl) CalculateTotalMultipleOfQuarter(receipt models.Rece
 	return points
 }
 
-func (s *ReceiptServiceImpl) CalculateItemPoints(receipt models.Receipt) int {
+func (s *ReceiptServiceImpl) CalculateItemPoints(receipt storemodels.Receipt) int {
 	logrus.Infof("Calculating item points for %d items", len(receipt.Items))
 	points := 0
 	points += (len(receipt.Items) / 2) * 5
@@ -103,7 +105,7 @@ func (s *ReceiptServiceImpl) CalculateItemPoints(receipt models.Receipt) int {
 	return points
 }
 
-func (s *ReceiptServiceImpl) CalculateItemDescriptionPoints(receipt models.Receipt) int {
+func (s *ReceiptServiceImpl) CalculateItemDescriptionPoints(receipt storemodels.Receipt) int {
 	logrus.Infof("Calculating points based on item descriptions")
 	points := 0
 	for _, item := range receipt.Items {
@@ -123,7 +125,7 @@ func (s *ReceiptServiceImpl) CalculateItemDescriptionPoints(receipt models.Recei
 	return points
 }
 
-func (s *ReceiptServiceImpl) CalculatePurchaseDatePoints(receipt models.Receipt) int {
+func (s *ReceiptServiceImpl) CalculatePurchaseDatePoints(receipt storemodels.Receipt) int {
 	logrus.Infof("Checking purchase date for odd day: %s", receipt.PurchaseDate)
 	points := 0
 	if receipt.PurchaseDate.Day()%2 != 0 {
@@ -135,7 +137,7 @@ func (s *ReceiptServiceImpl) CalculatePurchaseDatePoints(receipt models.Receipt)
 	return points
 }
 
-func (s *ReceiptServiceImpl) CalculatePurchaseTimePoints(receipt models.Receipt) int {
+func (s *ReceiptServiceImpl) CalculatePurchaseTimePoints(receipt storemodels.Receipt) int {
 	logrus.Infof("Checking purchase time for between 2:00 PM and 4:00 PM: %s", receipt.PurchaseTime)
 	points := 0
 	parsedTime, err := time.Parse("15:04", receipt.PurchaseTime)
@@ -148,7 +150,7 @@ func (s *ReceiptServiceImpl) CalculatePurchaseTimePoints(receipt models.Receipt)
 	return points
 }
 
-func (s *ReceiptServiceImpl) CalculateTotalPoints(receipt models.Receipt) int {
+func (s *ReceiptServiceImpl) CalculateTotalPoints(receipt storemodels.Receipt) int {
 	logrus.Info("Starting points calculation for receipt")
 	points := 0
 	points += s.CalculateRetailerPoints(receipt)

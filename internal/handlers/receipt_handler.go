@@ -1,8 +1,8 @@
 package handlers
 
 import (
-	"github.com/TechnoDiktator/fetch-rewards-challange/internal/models"
-
+	"github.com/TechnoDiktator/fetch-rewards-challange/internal/models/handlermodels"
+	"github.com/TechnoDiktator/fetch-rewards-challange/internal/models/storemodels"
 	"github.com/TechnoDiktator/fetch-rewards-challange/pkg/logger"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -11,7 +11,7 @@ import (
 
 // ProcessReceipt handles POST /receipts/process
 func (h *ReceiptHandler) ProcessReceipt(c *gin.Context) {
-	var req RequestReceipt
+	var req handlermodels.RequestReceipt
 	// Bind incoming JSON to RequestReceipt struct
 	if err := c.ShouldBindJSON(&req); err != nil {
 		// Return error if binding fails
@@ -36,7 +36,7 @@ func (h *ReceiptHandler) ProcessReceipt(c *gin.Context) {
 	}
 
 	// Convert the request to the internal model
-	receipt := models.Receipt{
+	receipt := storemodels.Receipt{
 		Retailer:     req.Retailer,
 		PurchaseDate: purchaseDate,
 		PurchaseTime: req.PurchaseTime,
@@ -57,10 +57,10 @@ func (h *ReceiptHandler) ProcessReceipt(c *gin.Context) {
 }
 
 // Helper function to convert request items to model layer items
-func convertToItemModel(items []RequestItem) []models.Item {
-	var result []models.Item
+func convertToItemModel(items []handlermodels.RequestItem) []storemodels.Item {
+	var result []storemodels.Item
 	for _, item := range items {
-		result = append(result, models.Item{
+		result = append(result, storemodels.Item{
 			ShortDescription: item.ShortDescription,
 			Price:            item.Price,
 		})

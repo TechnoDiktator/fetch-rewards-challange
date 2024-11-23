@@ -1,4 +1,4 @@
-package handlers
+package handlermodels
 
 // RequestReceipt represents the structure of the incoming request
 type RequestReceipt struct {

@@ -1,7 +1,7 @@
 package services
 
 import (
-	"github.com/TechnoDiktator/fetch-rewards-challange/internal/models"
+	"github.com/TechnoDiktator/fetch-rewards-challange/internal/models/storemodels"
 )
 
 //// Rule 1: Points based on the retailer name (1 point for every alphanumeric character)
@@ -28,23 +28,23 @@ import (
 // Log the final points calculated for the receipt
 
 type ReceiptService interface {
-	ProcessReceipt(receipt models.Receipt) (string, error)
+	ProcessReceipt(receipt storemodels.Receipt) (string, error)
 	GetPoints(id string) (int, error)
 
 	// Points Calculation Methods
-	CalculateRetailerPoints(receipt models.Receipt) int
+	CalculateRetailerPoints(receipt storemodels.Receipt) int
 
-	CalculateTotalIsRoundDollar(receipt models.Receipt) int
+	CalculateTotalIsRoundDollar(receipt storemodels.Receipt) int
 
-	CalculateTotalMultipleOfQuarter(receipt models.Receipt) int
+	CalculateTotalMultipleOfQuarter(receipt storemodels.Receipt) int
 
-	CalculateItemPoints(receipt models.Receipt) int
+	CalculateItemPoints(receipt storemodels.Receipt) int
 
-	CalculateItemDescriptionPoints(receipt models.Receipt) int
+	CalculateItemDescriptionPoints(receipt storemodels.Receipt) int
 
-	CalculatePurchaseDatePoints(receipt models.Receipt) int
+	CalculatePurchaseDatePoints(receipt storemodels.Receipt) int
 
-	CalculatePurchaseTimePoints(receipt models.Receipt) int
+	CalculatePurchaseTimePoints(receipt storemodels.Receipt) int
 
-	CalculateTotalPoints(receipt models.Receipt) int
+	CalculateTotalPoints(receipt storemodels.Receipt) int
 }

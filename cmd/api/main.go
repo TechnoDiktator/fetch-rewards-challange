@@ -5,6 +5,7 @@ import (
 	"github.com/TechnoDiktator/fetch-rewards-challange/internal/middlewares"
 	"github.com/TechnoDiktator/fetch-rewards-challange/internal/repository"
 	"github.com/TechnoDiktator/fetch-rewards-challange/internal/services"
+	"github.com/TechnoDiktator/fetch-rewards-challange/internal/utils/constants"
 	"github.com/gin-gonic/gin"
 )
 
@@ -25,8 +26,8 @@ func main() {
 	receiptHandler := handlers.NewReceiptHandler(receiptService)
 
 	// Define routes
-	r.POST("/receipts/process", receiptHandler.ProcessReceipt)
-	r.GET("/receipts/points/:id", receiptHandler.GetPoints)
+	r.POST(constants.ProcessReceipts, receiptHandler.ProcessReceipt)
+	r.GET(constants.GetPoints, receiptHandler.GetPoints)
 
 	// Start the Gin server on port 8080
 	r.Run(":8080")
