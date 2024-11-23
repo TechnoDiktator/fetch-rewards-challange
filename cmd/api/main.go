@@ -56,10 +56,9 @@ func startServer(router *gin.Engine) {
 		DEFINITION : // Start the HTTP server to listen for incoming API requests on the registered routes.//
 	*/
 	server := &http.Server{
-		Addr:              constants.PORT,
-		Handler:           router,
-		WriteTimeout:      constants.TIMEOUT, // Use this constant constants.TIMEOUT
-		ReadHeaderTimeout: 2 * time.Second,
+		Addr:         constants.PORT,
+		Handler:      router,
+		WriteTimeout: constants.TIMEOUT, // Use this constant constants.TIMEOUT
 	}
 	err := http2.ConfigureServer(server, nil)
 	if err != nil {
