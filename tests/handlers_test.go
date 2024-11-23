@@ -2,31 +2,27 @@ package tests
 
 import (
 	"bytes"
-	"github.com/TechnoDiktator/fetch-rewards-challange/internal/inmemorydb"
 	"github.com/TechnoDiktator/fetch-rewards-challange/internal/handlers"
+	"github.com/TechnoDiktator/fetch-rewards-challange/internal/inmemorydb"
 	"github.com/TechnoDiktator/fetch-rewards-challange/internal/models/storemodels"
 	"github.com/TechnoDiktator/fetch-rewards-challange/internal/services"
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator/v10"
 	"github.com/stretchr/testify/assert"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 )
 
-func setupTestService() services.ReceiptService {
-	// Mock or initialize the service
-	store := inmemorydb.NewMemoryStore()         // Or any other store you want to use
-	return services.NewReceiptServiceImpl(store) // This function should return a pointer, which is correct for our handler
-}
-
 func TestProcessReceipt_Success(t *testing.T) {
 	// Setup
 	gin.SetMode(gin.TestMode) // Use test mode to disable logging
 	router := gin.Default()
-	receiptService := setupTestService()
+	receiptService := setupService()
 
 	// Create a handler instance and attach it to the router
-	receiptHandler := handlers.ReceiptHandler{receiptService}
+	receiptHandler := handlers.ReceiptHandler{Service: receiptService,
+		Validator: validator.New()}
 	router.POST("/receipts/process", receiptHandler.ProcessReceipt)
 
 	// Prepare test data
@@ -72,10 +68,11 @@ func TestProcessReceipt_InvalidJSON(t *testing.T) {
 	// Setup
 	gin.SetMode(gin.TestMode)
 	router := gin.Default()
-	receiptService := setupTestService()
-
+	receiptService := setupService()
 	// Create a handler instance and attach it to the router
-	receiptHandler := NewReceiptHandler(receiptService)
+	receiptHandler := handlers.ReceiptHandler{Service: receiptService,
+		Validator: validator.New()}
+
 	router.POST("/receipts/process", receiptHandler.ProcessReceipt)
 
 	// Invalid JSON data

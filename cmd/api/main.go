@@ -2,8 +2,8 @@ package main
 
 import (
 	"context"
-	"github.com/TechnoDiktator/fetch-rewards-challange/internal/inmemorydb"
 	"github.com/TechnoDiktator/fetch-rewards-challange/internal/handlers"
+	"github.com/TechnoDiktator/fetch-rewards-challange/internal/inmemorydb"
 	"github.com/TechnoDiktator/fetch-rewards-challange/internal/middlewares"
 	"github.com/TechnoDiktator/fetch-rewards-challange/internal/services"
 	"github.com/TechnoDiktator/fetch-rewards-challange/internal/utils/constants"
