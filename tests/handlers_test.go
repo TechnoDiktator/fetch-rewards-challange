@@ -2,9 +2,9 @@ package tests
 
 import (
 	"bytes"
+	"github.com/TechnoDiktator/fetch-rewards-challange/internal/db"
 	"github.com/TechnoDiktator/fetch-rewards-challange/internal/handlers"
 	"github.com/TechnoDiktator/fetch-rewards-challange/internal/models/storemodels"
-	"github.com/TechnoDiktator/fetch-rewards-challange/internal/repository"
 	"github.com/TechnoDiktator/fetch-rewards-challange/internal/services"
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
@@ -15,7 +15,7 @@ import (
 
 func setupTestService() services.ReceiptService {
 	// Mock or initialize the service
-	store := repository.NewMemoryStore()         // Or any other store you want to use
+	store := db.NewMemoryStore()                 // Or any other store you want to use
 	return services.NewReceiptServiceImpl(store) // This function should return a pointer, which is correct for our handler
 }
 

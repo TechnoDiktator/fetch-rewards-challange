@@ -1,15 +1,15 @@
 package services
 
 import (
-	"github.com/TechnoDiktator/fetch-rewards-challange/internal/repository"
+	"github.com/TechnoDiktator/fetch-rewards-challange/internal/db"
 )
 
 // ReceiptServiceImpl implements the ReceiptService interface
 type ReceiptServiceImpl struct {
-	store *repository.ReceiptStore
+	store *db.ReceiptStore
 }
 
 // NewReceiptServiceImpl returns the implementing object of the ReceiptService interface
-func NewReceiptServiceImpl(store repository.ReceiptStore) ReceiptService {
+func NewReceiptServiceImpl(store db.ReceiptStore) ReceiptService {
 	return &ReceiptServiceImpl{store: &store}
 }

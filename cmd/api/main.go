@@ -2,9 +2,9 @@ package main
 
 import (
 	"context"
+	"github.com/TechnoDiktator/fetch-rewards-challange/internal/db"
 	"github.com/TechnoDiktator/fetch-rewards-challange/internal/handlers"
 	"github.com/TechnoDiktator/fetch-rewards-challange/internal/middlewares"
-	"github.com/TechnoDiktator/fetch-rewards-challange/internal/repository"
 	"github.com/TechnoDiktator/fetch-rewards-challange/internal/services"
 	"github.com/TechnoDiktator/fetch-rewards-challange/internal/utils/constants"
 	"github.com/TechnoDiktator/fetch-rewards-challange/pkg/logger"
@@ -32,7 +32,7 @@ func main() {
 	r.Use(middleware.LogRequest)
 
 	// Initialize the in-memory store for receipt data
-	store := repository.NewMemoryStore()
+	store := db.NewMemoryStore()
 
 	// Initialize the ReceiptService with the store
 	receiptService := services.NewReceiptServiceImpl(store)

@@ -1,4 +1,4 @@
-package repository
+package db
 
 import (
 	"github.com/TechnoDiktator/fetch-rewards-challange/internal/models/storemodels"
