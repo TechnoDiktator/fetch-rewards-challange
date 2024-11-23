@@ -3,18 +3,18 @@
 package middleware
 
 import (
+	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
-	"net/http"
 )
 
 // LogRequest is a middleware that logs incoming requests using logrus
-func LogRequest(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		logrus.WithFields(logrus.Fields{
-			"method": r.Method,
-			"url":    r.URL.Path,
-			"ip":     r.RemoteAddr,
-		}).Info("Incoming request")
-		next.ServeHTTP(w, r)
-	})
+func LogRequest(c *gin.Context) {
+	logrus.WithFields(logrus.Fields{
+		"method": c.Request.Method,
+		"url":    c.Request.URL.Path,
+		"ip":     c.ClientIP(),
+	}).Info("Incoming request")
+
+	// Continue to the next handler
+	c.Next()
 }

@@ -2,10 +2,9 @@ package handlers
 
 import (
 	"github.com/TechnoDiktator/fetch-rewards-challange/internal/models"
-	"github.com/TechnoDiktator/fetch-rewards-challange/internal/services"
+
 	"github.com/TechnoDiktator/fetch-rewards-challange/pkg/logger"
 	"github.com/gin-gonic/gin"
-	"github.com/go-playground/validator/v10"
 	"net/http"
 	"time"
 )

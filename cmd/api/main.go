@@ -2,28 +2,32 @@ package main
 
 import (
 	"github.com/TechnoDiktator/fetch-rewards-challange/internal/handlers"
+	"github.com/TechnoDiktator/fetch-rewards-challange/internal/middlewares"
 	"github.com/TechnoDiktator/fetch-rewards-challange/internal/repository"
 	"github.com/TechnoDiktator/fetch-rewards-challange/internal/services"
-	"github.com/TechnoDiktator/fetch-rewards-challange/pkg/logger"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	// Set up the store and the service
-	store := repository.NewMemoryStore()
-	service := services.NewReceiptServiceImpl(store)
-
-	// Set up the Gin router and handlers
+	// Initialize Gin router
 	r := gin.Default()
-	handler := handlers.NewReceiptHandler(service)
 
-	// Define routes and link them to handlers
-	r.POST("/receipts/process", handler.ProcessReceipt)
-	r.GET("/receipts/:id/points", handler.GetPoints)
+	// Apply the logging middleware globally
+	r.Use(middleware.LogRequest)
 
-	// Run the server
-	err := r.Run(":8080")
-	if err != nil {
-		logger.Log.Fatalf("Failed to start server: %v", err)
-	}
+	// Initialize the in-memory store for receipt data
+	store := repository.NewMemoryStore()
+
+	// Initialize the ReceiptService with the store
+	receiptService := services.NewReceiptServiceImpl(store)
+
+	// Initialize the ReceiptHandler with the service
+	receiptHandler := handlers.NewReceiptHandler(receiptService)
+
+	// Define routes
+	r.POST("/receipts/process", receiptHandler.ProcessReceipt)
+	r.GET("/receipts/points/:id", receiptHandler.GetPoints)
+
+	// Start the Gin server on port 8080
+	r.Run(":8080")
 }
