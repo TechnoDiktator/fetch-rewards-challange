@@ -56,10 +56,52 @@ git checkout master
 
 
 ### Additions to the README (Makefile):
-- **Makefile Commands**: Descriptions for each command (`run`, `test`, `fmt`, `tidy`, `clean`, `docker-build`, `docker-run`, `swagger`) to help users build, test, and run the project with ease.
-- **API Endpoints**: Detailed API endpoint documentation for processing receipts and fetching points.
+- **Makefile Commands**: Descriptions for each command (`run`, `test`, `fmt`, `tidy`, `clean`, `docker-build`, `docker-run`, `swagger`) to help users build, test, and run the project with ease , you can use below commands for testing and deployment as well
 
 
+
+## Makefile Commands
+
+This project includes a Makefile to streamline common tasks during development. Below are the available commands and their descriptions:
+
+### Commands
+
+- **`run`**  
+
+  **Command:**  
+  ```sh
+  make run
+- **`tidy`**  
+
+  **Command:**  
+  ```sh
+  make tidy
+- **`test`**  
+ 
+  **Command:**  
+  ```sh
+  make test
+- **`build`**  
+
+  **Command:**  
+  ```sh
+  make docker-build
+- **`docker run`**  
+
+  **Command:**  
+  ```sh
+  make docker-run
+- **`docker stop`**  
+
+  **Command:**  
+  ```sh
+  make docker-stop
+
+- **`docker restart`**  
+
+  **Command:**  
+  ```sh
+  make docker-restart
 
 
 ## Future Improvements
