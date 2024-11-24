@@ -3,9 +3,7 @@ package tests
 import (
 	"bytes"
 	"github.com/TechnoDiktator/fetch-rewards-challange/internal/handlers"
-	"github.com/TechnoDiktator/fetch-rewards-challange/internal/inmemorydb"
-	"github.com/TechnoDiktator/fetch-rewards-challange/internal/models/storemodels"
-	"github.com/TechnoDiktator/fetch-rewards-challange/internal/services"
+	"github.com/TechnoDiktator/fetch-rewards-challange/internal/utils/constants"
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
 	"github.com/stretchr/testify/assert"
@@ -19,6 +17,7 @@ func TestProcessReceipt_Success(t *testing.T) {
 	gin.SetMode(gin.TestMode) // Use test mode to disable logging
 	router := gin.Default()
 	receiptService := setupService()
+	//purchaseDate, err := time.Parse("2006-01-02", "2024-03-20")
 
 	// Create a handler instance and attach it to the router
 	receiptHandler := handlers.ReceiptHandler{Service: receiptService,
@@ -26,27 +25,53 @@ func TestProcessReceipt_Success(t *testing.T) {
 	router.POST("/receipts/process", receiptHandler.ProcessReceipt)
 
 	// Prepare test data
-	receipt := storemodels.Receipt{
-		Retailer:     "M&M Corner Market",
-		PurchaseDate: "2022-03-20",
-		PurchaseTime: "14:33",
-		Items: []storemodels.Item{
-			{ShortDescription: "Gatorade", Price: "2.25"},
-		},
-		Total: "2.25",
-	}
+	//receipt := storemodels.Receipt{
+	//	Retailer:     "M&M Corner Market",
+	//	PurchaseDate: purchaseDate,
+	//	PurchaseTime: "14:33",
+	//	Items: []storemodels.Item{
+	//		{ShortDescription: "Gatorade", Price: "2.25"},
+	//	},
+	//	Total: "2.25",
+	//}
 
 	// Marshal the data into JSON
+	//receiptJSON := `{
+	//	"retailer": "M&M Corner Market",
+	//	"purchaseDate": "2024-03-20",
+	//	"purchaseTime": "14:33",
+	//	"items": [{"shortDescription": "Gatorade", "price": "2.25"}],
+	//	"total": "2.25"
+	//}`
+
 	receiptJSON := `{
-		"retailer": "M&M Corner Market",
-		"purchaseDate": "2022-03-20",
-		"purchaseTime": "14:33",
-		"items": [{"shortDescription": "Gatorade", "price": "2.25"}],
-		"total": "2.25"
+		"retailer": "Target",
+		"purchaseDate": "2022-01-01",
+		"purchaseTime": "13:01",
+		"items": [
+	{
+	"shortDescription": "Mountain Dew 12PK",
+	"price": "6.49"
+	},{
+	"shortDescription": "Emils Cheese Pizza",
+	"price": "12.25"
+	},{
+	"shortDescription": "Knorr Creamy Chicken",
+	"price": "1.26"
+	},{
+	"shortDescription": "Doritos Nacho Cheese",
+	"price": "3.35"
+	},{
+	"shortDescription": "   Klarbrunn 12-PK 12 FL OZ  ",
+	"price": "12.00"
+	}
+	],
+	"total": "35.35"
 	}`
 
+	//purchaseDate, err := time.Parse("2006-01-02", "2024-03-20")
 	// Create a new HTTP request
-	req, err := http.NewRequest(http.MethodPost, "/receipts/process", bytes.NewBuffer([]byte(receiptJSON)))
+	req, err := http.NewRequest(http.MethodPost, constants.ProcessReceipts, bytes.NewBuffer([]byte(receiptJSON)))
 	if err != nil {
 		t.Fatal(err)
 	}
