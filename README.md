@@ -9,6 +9,133 @@ This repository contains the solution for the **Receipt Processor** assignment. 
 
 ---
 
+---
+
+## API Endpoints
+
+### **1. Process a Receipt**
+- **Endpoint**: `POST /receipts/process`
+- **Description**: Accepts a receipt JSON object, processes it, and returns a unique receipt ID.
+- **Sample Request Body**:
+  ```json
+  {
+      "retailer": "Target",
+      "purchaseDate": "2022-01-01",
+      "purchaseTime": "13:01",
+      "items": [
+          {
+              "shortDescription": "Mountain Dew 12PK",
+              "price": "6.49"
+          },
+          {
+              "shortDescription": "Emils Cheese Pizza",
+              "price": "12.25"
+          }
+      ],
+      "total": "35.35"
+  }
+  ```
+- **Sample Response**:
+  ```json
+  {
+      "id": "3a2b1c4d-567e-89f0-1234-56789abcdefg"
+  }
+  ```
+- **Postman Screenshot**:
+  ![POST /receipts/process](./static/processreceipt.png)
+
+
+
+
+### **2. Process a Receipt (INVALID RECEIPT)**
+- **Endpoint**: `POST /receipts/process`
+- **Description**: When an invalid Receipt is sent with attribute errors / format errors / numeric errors , Response will be Invalid Receipt Detailing The Error And The Field At Which The Error Happened.
+- **Sample Request Body**:
+  ```json
+  {
+      "retailer": "Target",
+      "purchaseDate": "2022-Invalid date",
+      "purchaseTime": "13:01",
+      "items": [
+          {
+              "shortDescription": "Mountain Dew 12PK",
+              "price": "6.49"
+          },
+          {
+              "shortDescription": "Emils Cheese Pizza",
+              "price": "12.25"
+          }
+      ],
+      "total": "35.35"
+  }
+  ```
+- **Sample Response**:
+  ```json
+  {
+      "id": "3a2b1c4d-567e-89f0-1234-56789abcdefg"
+  }
+  ```
+- **Postman Screenshot**:
+  ![POST /receipts/process](./static/invalidreceipt.png)
+
+
+
+
+
+
+
+---
+
+### **2. Get Points for a Receipt**
+- **Endpoint**: `GET /receipts/points/:id`
+- **Description**: Fetches the points for the receipt with the given ID.
+- **Sample Request**:
+  ```
+  GET /receipts/points/3a2b1c4d-567e-89f0-1234-56789abcdefg
+  ```
+- **Sample Response**:
+  ```json
+  {
+      "points": 28
+  }
+  ```
+- **Postman Screenshot**:
+  ![GET /receipts/points/:id](./static/getpoints.png)
+
+
+### **3. Get Points for a Receipt(RECEIPT NOT FOUND)**
+- **Endpoint**: `GET /receipts/points/:id`
+- **Description**: Will Return An Error If The Receipt Is Not Found In The Memory Store.
+- **Sample Request**:
+  ```
+  GET /receipts/points/3a2b1c4d-567e-89f0-1234-56789abcd
+  ```
+- **Sample Response**:
+  ```json
+    {
+        "description": "No receipt found for that id",
+        "error": "Receipt not found"
+    }
+  ```
+- **Postman Screenshot**:
+  ![GET /receipts/points/:id](./static/notfound.png)
+
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+
+
 ## Running the Project
 
 ### Prerequisites
@@ -48,7 +175,22 @@ cd fetch-rewards-challange
 
 
 
+## Folder Structure
 
+```
+fetch-rewards-challenge/
+├── cmd/                # Entry point for the application
+├── internal/           # Application logic
+│   ├── handlers/       # HTTP handlers
+│   ├── services/       # Business logic for receipts and points
+│   ├── inmemorydb/     # In-memory data store
+│   ├── models/         # Receipt models and validations
+├── pkg/                # Reusable utilities (e.g., logger)
+├── static/             # Images and other static assets (e.g., Postman screenshots)
+├── Dockerfile          # Docker build configuration
+├── docker-compose.yml  # Compose file (optional, if needed)
+├── README.md           # Documentation
+```
 
 
 
