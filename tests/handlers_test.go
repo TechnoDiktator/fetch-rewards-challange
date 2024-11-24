@@ -13,6 +13,9 @@ import (
 	"testing"
 )
 
+// TestProcessReceipt_Success tests the successful processing of a receipt.
+// This test sends a POST request to the /receipts/process endpoint with valid JSON data.
+// It expects a 200 OK status code and a response body containing an 'id' field.
 func TestProcessReceipt_Success(t *testing.T) {
 	// Setup
 	logger.InitializeLogger()
@@ -75,6 +78,9 @@ func TestProcessReceipt_Success(t *testing.T) {
 	logger.Log.Info()
 }
 
+// TestProcessReceipt_InvalidJSON tests the handling of invalid JSON data.
+// This test sends a POST request to the /receipts/process endpoint with malformed JSON.
+// It expects a 400 Bad Request status code and an error message in the response body.
 func TestProcessReceipt_InvalidJSON(t *testing.T) {
 	//declare logger
 	logger.InitializeLogger()

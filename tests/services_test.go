@@ -8,6 +8,7 @@ import (
 	"time"
 )
 
+// TestCalculateRetailerPoints tests the point calculation based on the retailer's name length
 func TestCalculateRetailerPoints(t *testing.T) {
 
 	service := setupService()
@@ -27,6 +28,7 @@ func TestCalculateRetailerPoints(t *testing.T) {
 	logger.Log.Info("========================================================================= ")
 }
 
+// TestCalculateTotalIsRoundDollar tests the point calculation based on whether the total is a round dollar amount
 func TestCalculateTotalIsRoundDollar(t *testing.T) {
 	service := setupService()
 	// Initialize the logger before each test
@@ -53,7 +55,7 @@ func TestCalculateTotalIsRoundDollar(t *testing.T) {
 	logger.Log.Info("=========================================================================")
 }
 
-// Test for ProcessReceipt with correct time.Time for PurchaseDate
+// TestProcessReceipt for ProcessReceipt with correct time.Time for PurchaseDate
 func TestProcessReceipt(t *testing.T) {
 	service := setupService()
 	// Initialize the logger before each test
@@ -123,6 +125,7 @@ func TestProcessReceipt(t *testing.T) {
 }
 */
 
+// TestProcessReceipt tests the processing of a receipt with a valid time.Time for PurchaseDate
 func TestGetPointsReceipt1(t *testing.T) {
 	service := setupService()
 
@@ -170,6 +173,7 @@ func TestGetPointsReceipt1(t *testing.T) {
 	logger.Log.Info("=========================================================================")
 }
 
+// TestProcessReceipt2 tests the processing of a receipt with a valid time.Time for PurchaseDate
 func TestGetPointsReceipt2(t *testing.T) {
 	service := setupService()
 
