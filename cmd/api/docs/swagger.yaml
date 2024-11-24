@@ -1,4 +1,18 @@
+basePath: /
+host: localhost:4040
 info:
-  contact: {}
+  contact:
+    email: rastogitarang5@gmail.com
+    name: Tarang Rastogi
+    url: https://technodiktator.github.io/portfolio/
+  description: This is a simple API for processing receipts and calculating rewards.
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  termsOfService: http://swagger.io/terms/
+  title: Fetch Rewards API
+  version: "1.0"
 paths: {}
+schemes:
+- http
 swagger: "2.0"

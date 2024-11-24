@@ -9,7 +9,16 @@ const docTemplate = `{
     "info": {
         "description": "{{escape .Description}}",
         "title": "{{.Title}}",
-        "contact": {},
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "Tarang Rastogi",
+            "url": "https://technodiktator.github.io/portfolio/",
+            "email": "rastogitarang5@gmail.com"
+        },
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        },
         "version": "{{.Version}}"
     },
     "host": "{{.Host}}",
@@ -19,16 +28,16 @@ const docTemplate = `{
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "1.0",                                                                   // Your API version
-	Host:             "localhost:4040",                                                        // The host where your API will be accessible
-	BasePath:         "/",                                                                     // The base path for your API
-	Schemes:          []string{"http"},                                                        // The protocols (http or https)
-	Title:            "Receipt Processor API",                                                 // Title of your API
-	Description:      "This API allows users to process receipts and retrieve reward points.", // A description of what the API does
-	InfoInstanceName: "swagger",                                                               // Instance name, should be unique (default is fine)
-	SwaggerTemplate:  docTemplate,                                                             // Reference to the template defined above
-	LeftDelim:        "{{",                                                                    // Delimiters used for templating
-	RightDelim:       "}}",                                                                    // Delimiters used for templating
+	Version:          "1.0",
+	Host:             "localhost:4040",
+	BasePath:         "/",
+	Schemes:          []string{"http"},
+	Title:            "Fetch Rewards API",
+	Description:      "This is a simple API for processing receipts and calculating rewards.",
+	InfoInstanceName: "swagger",
+	SwaggerTemplate:  docTemplate,
+	LeftDelim:        "{{",
+	RightDelim:       "}}",
 }
 
 func init() {

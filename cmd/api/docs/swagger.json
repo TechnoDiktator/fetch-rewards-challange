@@ -1,53 +1,24 @@
 {
+    "schemes": [
+        "http"
+    ],
     "swagger": "2.0",
     "info": {
-        "title": "Receipt Processor API",
-        "description": "This API allows users to process receipts and retrieve reward points. PLEASE CONTACT ME IF YOU LIKE IT  +91 7534099359",
-        "version": "1.0",
+        "description": "This is a simple API for processing receipts and calculating rewards.",
+        "title": "Fetch Rewards API",
+        "termsOfService": "http://swagger.io/terms/",
         "contact": {
-            "email": "rastogitarang5@gmail.com",
-            "url": "https://technodiktator.github.io/portfolio/"
-        }
+            "name": "Tarang Rastogi",
+            "url": "https://technodiktator.github.io/portfolio/",
+            "email": "rastogitarang5@gmail.com"
+        },
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        },
+        "version": "1.0"
     },
     "host": "localhost:4040",
     "basePath": "/",
-    "schemes": ["http"],
-    "paths": {
-        "/receipts/process": {
-            "post": {
-                "summary": "Process a receipt",
-                "description": "Submit a receipt to process it and calculate reward points.",
-                "responses": {
-                    "200": {
-                        "description": "Receipt processed successfully"
-                    },
-                    "400": {
-                        "description": "Invalid receipt data"
-                    }
-                }
-            }
-        },
-        "/receipts/points/{id}": {
-            "get": {
-                "summary": "Get reward points for a receipt",
-                "description": "Retrieve the reward points for a specific receipt using its ID.",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successfully retrieved reward points"
-                    },
-                    "404": {
-                        "description": "Receipt not found"
-                    }
-                }
-            }
-        }
-    }
+    "paths": {}
 }
