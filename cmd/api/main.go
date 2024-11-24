@@ -18,6 +18,21 @@ import (
 	"time"
 )
 
+// @title Fetch Rewards API
+// @version 1.0
+// @description This is a simple API for processing receipts and calculating rewards.
+// @termsOfService http://swagger.io/terms/
+
+// @contact.name  Tarang Rastogi
+// @contact.url https://technodiktator.github.io/portfolio/
+// @contact.email rastogitarang5@gmail.com
+
+// @license.name MIT
+// @license.url https://opensource.org/licenses/MIT
+
+// @host localhost:4040
+// @BasePath /
+// @schemes http
 func main() {
 
 	// Set up signal handling to gracefully shut down
@@ -41,7 +56,26 @@ func main() {
 	receiptHandler := handlers.NewReceiptHandler(receiptService)
 
 	// Define routes
+	// Define routes
+
+	// @Summary Process a receipt
+	// @Description Process a receipt to calculate rewards
+	// @Accept json
+	// @Produce json
+	// @Param receipt body Receipt true "Receipt Data"
+	// @Success 200 {object} ReceiptResponse "Points calculated"
+	// @Failure 400 {object} ErrorResponse "Invalid data"
+	// @Router /receipts [post]
 	r.POST(constants.ProcessReceipts, receiptHandler.ProcessReceipt)
+
+	// @Summary Get points for a user
+	// @Description Get the total points a user has earned
+	// @Accept json
+	// @Produce json
+	// @Param user_id path string true "User ID"
+	// @Success 200 {object} PointsResponse "Total points"
+	// @Failure 400 {object} ErrorResponse "Invalid user ID"
+	// @Router /points/{user_id} [get]
 	r.GET(constants.GetPoints, receiptHandler.GetPoints)
 
 	// Start the Gin server on port 8080
