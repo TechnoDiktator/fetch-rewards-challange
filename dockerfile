@@ -4,17 +4,17 @@ FROM golang:1.22.5-alpine as builder
 # Set the Current Working Directory inside the container
 WORKDIR /app
 
-# Copy the Go Modules files
-COPY ../go.mod ../go.sum ./
+# Copy the Go Modules files (from the root directory)
+COPY go.mod go.sum ./
 
 # Download all dependencies. Dependencies will be cached if the go.mod and go.sum files are not changed
 RUN go mod tidy
 
-# Copy the source code into the container
-COPY . .
+# Copy the 'cmd/api' folder into the container
+COPY cmd/api ./cmd/api
 
-# Build the Go app
-RUN CGO_ENABLED=0 GOOS=linux go build -o main .
+# Build the Go app from 'cmd/api'
+RUN CGO_ENABLED=0 GOOS=linux go build -o main ./cmd/api
 
 # Start a new stage from scratch
 FROM alpine:latest
@@ -25,10 +25,10 @@ RUN apk --no-cache add ca-certificates
 # Set the Current Working Directory inside the container
 WORKDIR /root/
 
-# Copy the Pre-built binary file from the previous stage
+# Copy the pre-built binary file from the builder stage
 COPY --from=builder /app/main .
 
-# Expose port 4040 for the server
+# Expose the port where your server will run
 EXPOSE 4040
 
 # Command to run the executable
