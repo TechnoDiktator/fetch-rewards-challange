@@ -14,7 +14,7 @@ func TestCalculateRetailerPoints(t *testing.T) {
 	// Initialize the logger before each test
 	logger.InitializeLogger()
 
-	logger.Log.Info("=========================================================================")
+	logger.Log.Info("========================================================================= \n")
 	receipt := storemodels.Receipt{Retailer: "Target"}
 	expectedPoints := 6 // "Target" has 6 alphanumeric characters.
 
@@ -24,7 +24,7 @@ func TestCalculateRetailerPoints(t *testing.T) {
 		t.Errorf("expected %d points, got %d", expectedPoints, points)
 	}
 
-	logger.Log.Info("=========================================================================")
+	logger.Log.Info("========================================================================= \n")
 }
 
 func TestCalculateTotalIsRoundDollar(t *testing.T) {
@@ -32,7 +32,7 @@ func TestCalculateTotalIsRoundDollar(t *testing.T) {
 	// Initialize the logger before each test
 	logger.InitializeLogger()
 
-	logger.Log.Info("=========================================================================")
+	logger.Log.Info("========================================================================= \n")
 	tests := []struct {
 		total    string
 		expected int
@@ -50,7 +50,7 @@ func TestCalculateTotalIsRoundDollar(t *testing.T) {
 		}
 	}
 
-	logger.Log.Info("=========================================================================")
+	logger.Log.Info("========================================================================= \n")
 }
 
 // Test for ProcessReceipt with correct time.Time for PurchaseDate
@@ -60,7 +60,7 @@ func TestProcessReceipt(t *testing.T) {
 	logger.InitializeLogger()
 	// Parse PurchaseDate into a time.Time object
 
-	logger.Log.Info("=========================================================================")
+	logger.Log.Info("========================================================================= \n")
 	purchaseDate, err := time.Parse("2006-01-02", "2022-03-20")
 	if err != nil {
 		t.Fatalf("failed to parse purchase date: %v", err)
@@ -93,7 +93,7 @@ func TestProcessReceipt(t *testing.T) {
 		t.Errorf("invalid receipt ID format: %v", err)
 	}
 
-	logger.Log.Info("=========================================================================")
+	logger.Log.Info("=========================================================================\n")
 }
 
 /*
@@ -128,7 +128,7 @@ func TestGetPointsReceipt1(t *testing.T) {
 
 	logger.InitializeLogger()
 
-	logger.Log.Info("=========================================================================")
+	logger.Log.Info("=========================================================================\n")
 	purchaseDate, err := time.Parse("2006-01-02", "2022-01-01")
 	// Add receipt to the store
 	receipt := storemodels.Receipt{
@@ -167,7 +167,7 @@ func TestGetPointsReceipt1(t *testing.T) {
 		t.Errorf("expected %d points, got %d", expectedPoints, points)
 	}
 
-	logger.Log.Info("=========================================================================")
+	logger.Log.Info("=========================================================================\n")
 }
 
 func TestGetPointsReceipt2(t *testing.T) {
@@ -175,7 +175,7 @@ func TestGetPointsReceipt2(t *testing.T) {
 
 	logger.InitializeLogger()
 
-	logger.Log.Info("=========================================================================")
+	logger.Log.Info("=========================================================================\n")
 	purchaseDate, err := time.Parse("2006-01-02", "2022-03-20")
 	// Add receipt to the store
 	receipt := storemodels.Receipt{
@@ -214,5 +214,5 @@ func TestGetPointsReceipt2(t *testing.T) {
 		t.Errorf("expected %d points, got %d", expectedPoints, points)
 	}
 
-	logger.Log.Info("=========================================================================")
+	logger.Log.Info("=========================================================================\n")
 }
