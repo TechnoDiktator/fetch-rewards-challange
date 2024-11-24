@@ -183,13 +183,18 @@ fetch-rewards-challenge/
 ├── internal/           # Application logic
 │   ├── handlers/       # HTTP handlers
 │   ├── services/       # Business logic for receipts and points
+│   ├── middlewares/    # Middleware for logging the incoming request
 │   ├── inmemorydb/     # In-memory data store
 │   ├── models/         # Receipt models and validations
+|   ├── utils           # Contains The constants Used In the project (urls and ports)
+├── example/            # Contains Example Jsons
+
 ├── pkg/                # Reusable utilities (e.g., logger)
 ├── static/             # Images and other static assets (e.g., Postman screenshots)
 ├── Dockerfile          # Docker build configuration
 ├── docker-compose.yml  # Compose file (optional, if needed)
 ├── README.md           # Documentation
+
 ```
 
 
