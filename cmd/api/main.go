@@ -65,7 +65,7 @@ func main() {
 	// Test route
 	r.GET("/example", func(c *gin.Context) {
 		c.JSON(200, gin.H{
-			"message": "Hello, world!",
+			"message": "TEST!",
 		})
 	})
 

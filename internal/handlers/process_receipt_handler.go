@@ -10,6 +10,17 @@ import (
 )
 
 // ProcessReceipt handles POST /receipts/process
+// @Summary Process a receipt
+// @Description Process a receipt to calculate rewards and return receipt ID
+// @Accept json
+// @Produce json
+// @Param receipt body handlermodels.RequestReceipt true "Receipt Data"
+// @Success 200 {object} gin.H{"id": "string"} "Receipt ID generated"
+// @Failure 400 {object} map[string]string "Invalid request body"
+// @Failure 400 {object} map[string]string "Validation failed"
+// @Failure 400 {object} map[string]string "Invalid date format"
+// @Failure 500 {object} map[string]string "Internal server error"
+// @Router /receipts/process [post]
 func (h *ReceiptHandler) ProcessReceipt(c *gin.Context) {
 	var req handlermodels.RequestReceipt
 	// Bind incoming JSON to RequestReceipt struct
