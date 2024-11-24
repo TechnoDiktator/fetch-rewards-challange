@@ -1,6 +1,13 @@
 # fetch-rewards-challange
 Assignment For The Fetch Rewards Challange (RECEIPT PROCESSOR)
 
+
+---
+## Tarang Rastogi (rastogitarang5@gmail.com)
+## Portfolio (https://technodiktator.github.io/portfolio/)
+---
+
+
 # Receipt Processor API - Assignment Documentation
 
 ## Overview
