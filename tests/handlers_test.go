@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"github.com/TechnoDiktator/fetch-rewards-challange/internal/handlers"
 	"github.com/TechnoDiktator/fetch-rewards-challange/internal/utils/constants"
+	"github.com/TechnoDiktator/fetch-rewards-challange/pkg/logger"
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
 	"github.com/stretchr/testify/assert"
@@ -14,6 +15,8 @@ import (
 
 func TestProcessReceipt_Success(t *testing.T) {
 	// Setup
+
+	logger.InitializeLogger()
 	gin.SetMode(gin.TestMode) // Use test mode to disable logging
 	router := gin.Default()
 	receiptService := setupService()
@@ -23,26 +26,6 @@ func TestProcessReceipt_Success(t *testing.T) {
 	receiptHandler := handlers.ReceiptHandler{Service: receiptService,
 		Validator: validator.New()}
 	router.POST("/receipts/process", receiptHandler.ProcessReceipt)
-
-	// Prepare test data
-	//receipt := storemodels.Receipt{
-	//	Retailer:     "M&M Corner Market",
-	//	PurchaseDate: purchaseDate,
-	//	PurchaseTime: "14:33",
-	//	Items: []storemodels.Item{
-	//		{ShortDescription: "Gatorade", Price: "2.25"},
-	//	},
-	//	Total: "2.25",
-	//}
-
-	// Marshal the data into JSON
-	//receiptJSON := `{
-	//	"retailer": "M&M Corner Market",
-	//	"purchaseDate": "2024-03-20",
-	//	"purchaseTime": "14:33",
-	//	"items": [{"shortDescription": "Gatorade", "price": "2.25"}],
-	//	"total": "2.25"
-	//}`
 
 	receiptJSON := `{
 		"retailer": "Target",
@@ -90,6 +73,9 @@ func TestProcessReceipt_Success(t *testing.T) {
 }
 
 func TestProcessReceipt_InvalidJSON(t *testing.T) {
+	//declare logger
+	logger.InitializeLogger()
+
 	// Setup
 	gin.SetMode(gin.TestMode)
 	router := gin.Default()

@@ -6,10 +6,10 @@ import (
 
 // ReceiptServiceImpl implements the ReceiptService interface
 type ReceiptServiceImpl struct {
-	store *inmemorydb.ReceiptStore
+	store inmemorydb.ReceiptStore
 }
 
 // NewReceiptServiceImpl returns the implementing object of the ReceiptService interface
 func NewReceiptServiceImpl(store inmemorydb.ReceiptStore) ReceiptService {
-	return &ReceiptServiceImpl{store: &store}
+	return &ReceiptServiceImpl{store: store}
 }

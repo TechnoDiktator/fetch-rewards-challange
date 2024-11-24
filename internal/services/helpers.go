@@ -1,6 +1,7 @@
 package services
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/TechnoDiktator/fetch-rewards-challange/internal/models/storemodels"
 	"github.com/TechnoDiktator/fetch-rewards-challange/pkg/logger"
@@ -24,6 +25,12 @@ func (s *ReceiptServiceImpl) ProcessReceipt(receipt storemodels.Receipt) (string
 	logger.Log.WithFields(logrus.Fields{
 		"id": id,
 	}).Info("Receipt processed successfully")
+
+	jsond, _ := json.Marshal(receipt)
+
+	logger.Log.Info("===================RECEIPT ADDED=======================")
+	logger.Log.Info(string(jsond))
+	logger.Log.Info("===================RECEIPT ADDED=======================")
 
 	return id, nil
 

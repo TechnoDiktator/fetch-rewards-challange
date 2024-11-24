@@ -83,11 +83,38 @@ func TestProcessReceipt(t *testing.T) {
 	}
 }
 
-func TestGetPoints(t *testing.T) {
+/*
+{
+  "retailer": "Target",
+  "purchaseDate": "2022-01-01",
+  "purchaseTime": "13:01",
+  "items": [
+    {
+      "shortDescription": "Mountain Dew 12PK",
+      "price": "6.49"
+    },{
+      "shortDescription": "Emils Cheese Pizza",
+      "price": "12.25"
+    },{
+      "shortDescription": "Knorr Creamy Chicken",
+      "price": "1.26"
+    },{
+      "shortDescription": "Doritos Nacho Cheese",
+      "price": "3.35"
+    },{
+      "shortDescription": "   Klarbrunn 12-PK 12 FL OZ  ",
+      "price": "12.00"
+    }
+  ],
+  "total": "35.35"
+}
+*/
+
+func TestGetPointsReceipt1(t *testing.T) {
 	service := setupService()
 
 	logger.InitializeLogger()
-	purchaseDate, err := time.Parse("2006-01-02", "2022-03-20")
+	purchaseDate, err := time.Parse("2006-01-02", "2022-01-01")
 	// Add receipt to the store
 	receipt := storemodels.Receipt{
 		Retailer:     "Target",
@@ -95,8 +122,13 @@ func TestGetPoints(t *testing.T) {
 		PurchaseTime: "13:01",
 		Items: []storemodels.Item{
 			{ShortDescription: "Mountain Dew 12PK", Price: "6.49"},
+			{ShortDescription: "Emils Cheese Pizza", Price: "12.25"},
+			{ShortDescription: "Knorr Creamy Chicken", Price: "1.26"},
+			{ShortDescription: "Doritos Nacho Cheese", Price: "3.35"},
+			{ShortDescription: "   Klarbrunn 12-PK 12 FL OZ  ", Price: "12.00"},
 		},
-		Total: "6.49",
+
+		Total: "35.35",
 	}
 	id, _ := service.ProcessReceipt(receipt)
 
@@ -107,7 +139,57 @@ func TestGetPoints(t *testing.T) {
 	}
 
 	// Expected points based on business logic
-	expectedPoints := 10 // Retailer and item logic
+	expectedPoints := 28 // Retailer and item logic
+	if expectedPoints == points {
+		logger.Log.Info("============= =============== =============")
+		logger.Log.Info("============= Bow Wow Wow !!! =============")
+		logger.Log.Info("============== Yippie Yo !!! ==============")
+		logger.Log.Info("============== Yippie Ye !!! ==============")
+		logger.Log.Info("============= =============== =============")
+	}
+
+	if points != expectedPoints {
+		t.Errorf("expected %d points, got %d", expectedPoints, points)
+	}
+}
+
+func TestGetPointsReceipt2(t *testing.T) {
+	service := setupService()
+
+	logger.InitializeLogger()
+	purchaseDate, err := time.Parse("2006-01-02", "2022-03-20")
+	// Add receipt to the store
+	receipt := storemodels.Receipt{
+		Retailer:     "M&M Corner Market",
+		PurchaseDate: purchaseDate,
+		PurchaseTime: "14:33",
+		Items: []storemodels.Item{
+			{ShortDescription: "Gatorade", Price: "2.25"},
+			{ShortDescription: "Gatorade", Price: "2.25"},
+			{ShortDescription: "Gatorade", Price: "2.25"},
+			{ShortDescription: "Gatorade", Price: "2.25"},
+			{ShortDescription: "Gatorade", Price: "2.25"},
+		},
+
+		Total: "9.00",
+	}
+	id, _ := service.ProcessReceipt(receipt)
+
+	// Fetch points
+	points, err := service.GetPoints(id)
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	// Expected points based on business logic
+	expectedPoints := 109
+	if expectedPoints == points {
+		logger.Log.Info("============= =============== =============")
+		logger.Log.Info("============= Bow Wow Wow !!! =============")
+		logger.Log.Info("============== Yippie Yo !!! ==============")
+		logger.Log.Info("============== Yippie Ye !!! ==============")
+		logger.Log.Info("============= =============== =============")
+	}
 
 	if points != expectedPoints {
 		t.Errorf("expected %d points, got %d", expectedPoints, points)

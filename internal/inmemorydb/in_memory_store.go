@@ -28,9 +28,12 @@ func (s *MemoryStore) AddReceipt(receipt storemodels.Receipt) string {
 	defer s.mu.Unlock()
 	logrus.Infof("adding receipt In The In Memory Store")
 
+	logrus.Infof("===========CREATING UUID==========")
 	id := uuid.New().String()
+	logrus.Infof("UUID : %s", id)
 	receipt.ID = id
 	s.receipts[id] = receipt
+	logrus.Infof("===========CREATED UUID==========")
 	return id
 }
 
@@ -42,7 +45,9 @@ func (s *MemoryStore) GetReceiptByID(id string) (storemodels.Receipt, bool) {
 
 	receipt, exists := s.receipts[id]
 	if !exists {
+		logrus.Infof("==========RECEIPT NOT FOUND BY ID==========")
 		return storemodels.Receipt{}, false
 	}
+
 	return receipt, exists
 }
