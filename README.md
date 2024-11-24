@@ -15,6 +15,8 @@ This repository contains the solution for the **Receipt Processor** assignment. 
 
 Make sure you have Go and Docker installed.
 
+## Dont forget to switch to branch master
+
 ### 1. **Clone the Repository**
 ```bash
 git clone https://github.com/TechnoDiktator/fetch-rewards-challange.git
