@@ -234,15 +234,12 @@ fetch-rewards-challenge/
      ```bash
      go get github.com/google/uuid
      ```
-   - (Optional) Installed Swagger for API documentation:
+   - Installed Swagger for API documentation:
      ```bash
      go get -u github.com/swaggo/gin-swagger
      go get -u github.com/swaggo/files
      ```
-   - (Optional) Installed Testify for unit testing:
-     ```bash
-     go get github.com/stretchr/testify
-     ```
+
 
 
 ### 3. **API Implementation**
