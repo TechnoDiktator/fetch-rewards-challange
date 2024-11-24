@@ -19,16 +19,16 @@ const docTemplate = `{
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "",
-	Host:             "",
-	BasePath:         "",
-	Schemes:          []string{},
-	Title:            "",
-	Description:      "",
-	InfoInstanceName: "swagger",
-	SwaggerTemplate:  docTemplate,
-	LeftDelim:        "{{",
-	RightDelim:       "}}",
+	Version:          "1.0",                                                                   // Your API version
+	Host:             "localhost:4040",                                                        // The host where your API will be accessible
+	BasePath:         "/",                                                                     // The base path for your API
+	Schemes:          []string{"http"},                                                        // The protocols (http or https)
+	Title:            "Receipt Processor API",                                                 // Title of your API
+	Description:      "This API allows users to process receipts and retrieve reward points.", // A description of what the API does
+	InfoInstanceName: "swagger",                                                               // Instance name, should be unique (default is fine)
+	SwaggerTemplate:  docTemplate,                                                             // Reference to the template defined above
+	LeftDelim:        "{{",                                                                    // Delimiters used for templating
+	RightDelim:       "}}",                                                                    // Delimiters used for templating
 }
 
 func init() {

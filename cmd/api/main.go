@@ -8,6 +8,7 @@ import (
 	"github.com/TechnoDiktator/fetch-rewards-challange/internal/services"
 	"github.com/TechnoDiktator/fetch-rewards-challange/internal/utils/constants"
 	"github.com/TechnoDiktator/fetch-rewards-challange/pkg/logger"
+
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
 	"golang.org/x/net/http2"
@@ -16,6 +17,9 @@ import (
 	"os/signal"
 	"syscall"
 	"time"
+
+	// Import the generated docs from the "cmd/api/docs" folder
+	_ "github.com/TechnoDiktator/fetch-rewards-challange/cmd/api/docs"
 )
 
 // @title Fetch Rewards API
@@ -80,6 +84,10 @@ func main() {
 
 	// Start the Gin server on port 8080
 	startServer(r)
+
+	// Serve Swagger UI and Docs
+	// Assuming you have the Swagger UI static assets in a folder named "swagger-ui" inside your docs folder
+	r.Static("/swagger", "./cmd/api/docs")
 
 	// Block until a shutdown signal is received
 	<-stop
