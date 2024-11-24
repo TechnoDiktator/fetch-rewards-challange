@@ -9,6 +9,50 @@ This repository contains the solution for the **Receipt Processor** assignment. 
 
 ---
 
+## Running the Project
+
+### Prerequisites
+
+Make sure you have Go and Docker installed.
+
+### 1. **Clone the Repository**
+```bash
+git clone https://github.com/TechnoDiktator/fetch-rewards-challange.git
+cd fetch-rewards-challange
+```
+
+### 2. **Run Using Docker**
+   - Build the Docker image:
+     ```bash
+     sudo docker build -t receipt-processor .
+     ```
+   - Run the Docker container:
+     ```bash
+     sudo docker run -p 4040:4040 receipt-processor
+     ```
+
+   - Test the API:
+     ```bash
+     curl http://localhost:4040/example
+     ```
+
+---
+
+## Future Improvements
+   - Persisting data in a database (optional as per assignment).
+   - Adding more unit tests for edge cases.
+   - Enhancing logging and error handling.
+
+
+
+
+
+
+
+
+
+
+
 ## Steps Taken
 
 ### 1. **Project Setup**
@@ -63,11 +107,8 @@ This repository contains the solution for the **Receipt Processor** assignment. 
    - Wrote unit tests for both handlers and services.
    - Focused on testing the API response as well as the correctness of point calculations.
 
-### 7. **Swagger Documentation (Optional)**
-   - Added Swagger for API documentation to easily visualize and interact with the API.
-   - The Swagger UI can be accessed by visiting `/swagger/index.html` (if using Swagger setup).
 
-### 8. **Future Improvements**
+### 7. **Future Improvements**
    - Persisting data in a database (optional as per assignment).
    - Adding more unit tests for edge cases.
    - Enhancing logging and error handling.
