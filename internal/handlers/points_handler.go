@@ -23,7 +23,7 @@ func (h *ReceiptHandler) GetPoints(c *gin.Context) {
 	points, err := h.Service.GetPoints(id)
 	if err != nil {
 		logger.Log.Errorf("Failed to get points for receipt ID %s: %v", id, err)
-		c.JSON(http.StatusNotFound, gin.H{"error": "Receipt not found"})
+		c.JSON(http.StatusNotFound, gin.H{"description": "No receipt found for that id", "error": "Receipt not found"})
 		return
 	}
 

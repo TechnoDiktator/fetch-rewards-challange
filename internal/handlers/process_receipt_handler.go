@@ -27,7 +27,7 @@ func (h *ReceiptHandler) ProcessReceipt(c *gin.Context) {
 	if err := c.ShouldBindJSON(&req); err != nil {
 		// Return error if binding fails
 		logger.Log.Errorf("Failed to bind request body: %v", err)
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request body"})
+		c.JSON(http.StatusBadRequest, gin.H{"description": "The receipt is invalid", "error": "Invalid request body"})
 		return
 	}
 
@@ -35,14 +35,14 @@ func (h *ReceiptHandler) ProcessReceipt(c *gin.Context) {
 	if err := h.Validator.Struct(&req); err != nil {
 		// Return validation errors
 		logger.Log.Errorf("Validation failed: %v", err)
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Validation failed", "details": err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"description": "The receipt is invalid", "error": "Validation failed", "details": err.Error()})
 		return
 	}
 	// Parse the purchase date string into a time.Time object
 	purchaseDate, err := time.Parse("2006-01-02", req.PurchaseDate)
 	if err != nil {
 		logger.Log.Errorf("Invalid date format for purchase_date: %v", err)
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid date format, expected YYYY-MM-DD"})
+		c.JSON(http.StatusBadRequest, gin.H{"description": "The receipt is invalid", "error": "Invalid date format, expected YYYY-MM-DD"})
 		return
 	}
 
@@ -59,7 +59,7 @@ func (h *ReceiptHandler) ProcessReceipt(c *gin.Context) {
 	id, err := h.Service.ProcessReceipt(receipt)
 	if err != nil {
 		logger.Log.Errorf("Error processing receipt: %v", err)
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to process receipt"})
+		c.JSON(http.StatusInternalServerError, gin.H{"description": "Receipt Not Added", "error": "Failed to process receipt"})
 		return
 	}
 
