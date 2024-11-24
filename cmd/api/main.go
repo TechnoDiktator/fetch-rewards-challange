@@ -9,37 +9,35 @@ import (
 	"github.com/TechnoDiktator/fetch-rewards-challange/internal/utils/constants"
 	"github.com/TechnoDiktator/fetch-rewards-challange/pkg/logger"
 
+	// Import the generated docs from the "cmd/api/docs" folder
+	_ "github.com/TechnoDiktator/fetch-rewards-challange/cmd/api/docs"
+
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
+
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
-	swaggerFiles "github.com/swaggo/files"     // Import swagger files
-	ginSwagger "github.com/swaggo/gin-swagger" // Import gin-swagger middleware
 	"golang.org/x/net/http2"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
-	// Import the generated docs from the "cmd/api/docs" folder
-	_ "github.com/TechnoDiktator/fetch-rewards-challange/cmd/api/docs"
 )
 
 // @title           Fetch Rewards API
 // @version         1.0
 // @description     This is a simple API for processing receipts and calculating rewards.
 // @termsOfService  http://swagger.io/terms/
-
 // @contact.name    Tarang Rastogi
 // @contact.url     https://technodiktator.github.io/portfolio/
 // @contact.email   rastogitarang5@gmail.com
-
 // @license.name    MIT
 // @license.url     https://opensource.org/licenses/MIT
-
 // @host            localhost:4040
 // @BasePath        /
 // @schemes         http
 func main() {
-
 	// Set up signal handling to gracefully shut down
 	logger.InitializeLogger()
 	stop := make(chan os.Signal, 1)
@@ -61,32 +59,23 @@ func main() {
 	receiptHandler := handlers.NewReceiptHandler(receiptService)
 
 	// Define routes
-
-	// @Summary Process a receipt
-	// @Description Process a receipt to calculate rewards
-	// @Accept json
-	// @Produce json
-	// @Param receipt body Receipt true "Receipt Data"
-	// @Success 200 {object} ReceiptResponse "Points calculated"
-	// @Failure 400 {object} ErrorResponse "Invalid data"
-	// @Router /receipts [post]
 	r.POST(constants.ProcessReceipts, receiptHandler.ProcessReceipt)
-
-	// @Summary Get points for a user
-	// @Description Get the total points a user has earned
-	// @Accept json
-	// @Produce json
-	// @Param user_id path string true "User ID"
-	// @Success 200 {object} PointsResponse "Total points"
-	// @Failure 400 {object} ErrorResponse "Invalid user ID"
-	// @Router /points/{user_id} [get]
 	r.GET(constants.GetPoints, receiptHandler.GetPoints)
 
-	// Start the Gin server on port 8080
-	startServer(r)
+	// Test route
+	r.GET("/example", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "Hello, world!",
+		})
+	})
 
-	// Setup Swagger
+	r.Static("/swagger-ui", "./docs")
+
+	// Setup Swagger UI - Pointing to the Swagger docs in the cmd/api/docs folder
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+
+	// Start the Gin server on port 4040
+	startServer(r)
 
 	// Block until a shutdown signal is received
 	<-stop
