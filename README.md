@@ -9,6 +9,50 @@ This repository contains the solution for the **Receipt Processor** assignment. 
 
 ---
 
+## Running the Project
+
+### Prerequisites
+
+Make sure you have Go and Docker installed.
+
+### 1. **Clone the Repository**
+```bash
+git clone https://github.com/TechnoDiktator/fetch-rewards-challange.git
+cd fetch-rewards-challange
+
+```
+
+### 2. **Switch to branch master**
+```
+git checkout master 
+```
+
+### 3. **Run Using Docker**
+   - Build the Docker image:
+     ```bash
+     sudo docker build -t receipt-processor .
+     ```
+   - Run the Docker container:
+     ```bash
+     sudo docker run -p 4040:4040 receipt-processor
+     ```
+
+   - Test the API:
+     ```bash
+     curl http://localhost:4040/example
+     ```
+
+---
+
+## Future Improvements
+   - Persisting data in a database (optional as per assignment).
+   - Adding more unit tests for edge cases.
+   - Enhancing logging and error handling.
+
+
+
+
+
 ---
 
 ## API Endpoints
@@ -130,51 +174,6 @@ This repository contains the solution for the **Receipt Processor** assignment. 
 
 
 
-
-
-
-
-
-
-## Running the Project
-
-### Prerequisites
-
-Make sure you have Go and Docker installed.
-
-### 1. **Clone the Repository**
-```bash
-git clone https://github.com/TechnoDiktator/fetch-rewards-challange.git
-cd fetch-rewards-challange
-```
-
-### 2. **Run Using Docker**
-   - Build the Docker image:
-     ```bash
-     sudo docker build -t receipt-processor .
-     ```
-   - Run the Docker container:
-     ```bash
-     sudo docker run -p 4040:4040 receipt-processor
-     ```
-
-   - Test the API:
-     ```bash
-     curl http://localhost:4040/example
-     ```
-
----
-
-## Future Improvements
-   - Persisting data in a database (optional as per assignment).
-   - Adding more unit tests for edge cases.
-   - Enhancing logging and error handling.
-
-
-
-
-
-
 ## Folder Structure
 
 ```
@@ -182,10 +181,10 @@ fetch-rewards-challenge/
 ├── cmd/                # Entry point for the application
 ├── internal/           # Application logic
 │   ├── handlers/       # HTTP handlers
-│   ├── services/       # Business logic for receipts and points
+│   ├── services/       # Business logic for receipts and pointscwith helper methods
 │   ├── middlewares/    # Middleware for logging the incoming request
 │   ├── inmemorydb/     # In-memory data store
-│   ├── models/         # Receipt models and validations
+│   ├── models/         # Receipt models Request Models
 |   ├── utils           # Contains The constants Used In the project (urls and ports)
 ├── example/            # Contains Example Jsons
 
@@ -255,21 +254,6 @@ fetch-rewards-challenge/
    - Focused on testing the API response as well as the correctness of point calculations.
 
 
-### 7. **Future Improvements**
-   - Persisting data in a database (optional as per assignment).
-   - Adding more unit tests for edge cases.
-   - Enhancing logging and error handling.
-
 ---
 
-## Running the Project
-
-### Prerequisites
-
-Make sure you have Go and Docker installed.
-
-### 1. **Clone the Repository**
-```bash
-git clone https://github.com/TechnoDiktator/fetch-rewards-challange.git
-cd fetch-rewards-challange
 
