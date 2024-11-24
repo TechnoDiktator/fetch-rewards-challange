@@ -11,32 +11,33 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
+	swaggerFiles "github.com/swaggo/files"     // Import swagger files
+	ginSwagger "github.com/swaggo/gin-swagger" // Import gin-swagger middleware
 	"golang.org/x/net/http2"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
-
 	// Import the generated docs from the "cmd/api/docs" folder
 	_ "github.com/TechnoDiktator/fetch-rewards-challange/cmd/api/docs"
 )
 
-// @title Fetch Rewards API
-// @version 1.0
-// @description This is a simple API for processing receipts and calculating rewards.
-// @termsOfService http://swagger.io/terms/
+// @title           Fetch Rewards API
+// @version         1.0
+// @description     This is a simple API for processing receipts and calculating rewards.
+// @termsOfService  http://swagger.io/terms/
 
-// @contact.name  Tarang Rastogi
-// @contact.url https://technodiktator.github.io/portfolio/
-// @contact.email rastogitarang5@gmail.com
+// @contact.name    Tarang Rastogi
+// @contact.url     https://technodiktator.github.io/portfolio/
+// @contact.email   rastogitarang5@gmail.com
 
-// @license.name MIT
-// @license.url https://opensource.org/licenses/MIT
+// @license.name    MIT
+// @license.url     https://opensource.org/licenses/MIT
 
-// @host localhost:4040
-// @BasePath /
-// @schemes http
+// @host            localhost:4040
+// @BasePath        /
+// @schemes         http
 func main() {
 
 	// Set up signal handling to gracefully shut down
@@ -59,7 +60,6 @@ func main() {
 	// Initialize the ReceiptHandler with the service
 	receiptHandler := handlers.NewReceiptHandler(receiptService)
 
-	// Define routes
 	// Define routes
 
 	// @Summary Process a receipt
@@ -85,9 +85,8 @@ func main() {
 	// Start the Gin server on port 8080
 	startServer(r)
 
-	// Serve Swagger UI and Docs
-	// Assuming you have the Swagger UI static assets in a folder named "swagger-ui" inside your docs folder
-	r.Static("/swagger", "./cmd/api/docs")
+	// Setup Swagger
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	// Block until a shutdown signal is received
 	<-stop
