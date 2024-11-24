@@ -16,7 +16,8 @@ import (
 func TestProcessReceipt_Success(t *testing.T) {
 	// Setup
 	logger.InitializeLogger()
-	logger.Log.Info("=========================================================================\n")
+	logger.Log.Info("=========================================================================")
+	logger.Log.Info()
 	gin.SetMode(gin.TestMode) // Use test mode to disable logging
 	router := gin.Default()
 	receiptService := setupService()
@@ -70,14 +71,15 @@ func TestProcessReceipt_Success(t *testing.T) {
 
 	// You can also check the response body if needed
 	assert.Contains(t, w.Body.String(), "id")
-	logger.Log.Info("=========================================================================\n")
+	logger.Log.Info("=========================================================================")
+	logger.Log.Info()
 }
 
 func TestProcessReceipt_InvalidJSON(t *testing.T) {
 	//declare logger
 	logger.InitializeLogger()
-	logger.Log.Info("=========================================================================\n")
-
+	logger.Log.Info("=========================================================================")
+	logger.Log.Info()
 	// Setup
 	gin.SetMode(gin.TestMode)
 	router := gin.Default()
@@ -109,5 +111,6 @@ func TestProcessReceipt_InvalidJSON(t *testing.T) {
 	// Check if error message is in the response body
 	assert.Contains(t, w.Body.String(), "error")
 
-	logger.Log.Info("=========================================================================\n")
+	logger.Log.Info("=========================================================================")
+	logger.Log.Info()
 }
