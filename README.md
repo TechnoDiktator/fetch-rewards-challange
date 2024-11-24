@@ -193,7 +193,7 @@ fetch-rewards-challenge/
 ├── Dockerfile          # Docker build configuration
 ├── docker-compose.yml  # Compose file (optional, if needed)
 ├── README.md           # Documentation
-
+├── MAKEFILE.md
 ```
 
 
@@ -226,30 +226,20 @@ fetch-rewards-challenge/
      go get github.com/stretchr/testify
      ```
 
-### 3. **Folder Structure**
-   - Organized the code into logical modules:
-     - `cmd/api/main.go` — Entry point for the application.
-     - `internal/handlers/` — Contains the logic for handling HTTP requests.
-     - `internal/services/` — Business logic for calculating points based on receipt data.
-     - `internal/repository/` — In-memory store to hold receipts.
-     - `internal/models/` — Structs and validation for receipt data.
-     - `pkg/logger/` — Custom logger for the application.
-     - `tests/` — Unit tests for the handlers and services.
-   - Used `Makefile` for easy automation of common tasks.
 
-### 4. **API Implementation**
+### 3. **API Implementation**
    - Implemented two main endpoints:
      1. **`POST /receipts/process`**: Accepts a receipt in JSON format and generates a unique ID for it.
      2. **`GET /receipts/{id}/points`**: Retrieves the points for a receipt by ID.
 
-### 5. **Points Calculation Logic**
+### 4. **Points Calculation Logic**
    - Implemented the logic for calculating points based on the rules provided in the assignment.
      - Points for retailer name length.
      - Points for total amount based on the conditions (round dollar, multiple of 0.25, etc.).
      - Points for items based on description length and price.
      - Points for the day and time of purchase.
 
-### 6. **Testing**
+### 5. **Testing**
    - Wrote unit tests for both handlers and services.
    - Focused on testing the API response as well as the correctness of point calculations.
 
