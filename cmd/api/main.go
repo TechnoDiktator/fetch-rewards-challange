@@ -9,12 +9,6 @@ import (
 	"github.com/TechnoDiktator/fetch-rewards-challange/internal/utils/constants"
 	"github.com/TechnoDiktator/fetch-rewards-challange/pkg/logger"
 
-	// Import the generated docs from the "cmd/api/docs" folder
-	_ "github.com/TechnoDiktator/fetch-rewards-challange/cmd/api/docs"
-
-	swaggerFiles "github.com/swaggo/files"
-	ginSwagger "github.com/swaggo/gin-swagger"
-
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
 	"golang.org/x/net/http2"
@@ -25,18 +19,6 @@ import (
 	"time"
 )
 
-// @title           Fetch Rewards API
-// @version         1.0
-// @description     This is a simple API for processing receipts and calculating rewards.
-// @termsOfService  http://swagger.io/terms/
-// @contact.name    Tarang Rastogi
-// @contact.url     https://technodiktator.github.io/portfolio/
-// @contact.email   rastogitarang5@gmail.com
-// @license.name    MIT
-// @license.url     https://opensource.org/licenses/MIT
-// @host            localhost:4040
-// @BasePath        /
-// @schemes         http
 func main() {
 	// Set up signal handling to gracefully shut down
 	logger.InitializeLogger()
@@ -65,16 +47,11 @@ func main() {
 	// Test route
 	r.GET("/example", func(c *gin.Context) {
 		c.JSON(200, gin.H{
-			"message": "TEST!",
+			"message": "Hello, world!",
 		})
 	})
 
-	r.Static("/swagger-ui", "./docs")
-
-	// Setup Swagger UI - Pointing to the Swagger docs in the cmd/api/docs folder
-	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-
-	// Start the Gin server on port 4040
+	// Start the server
 	startServer(r)
 
 	// Block until a shutdown signal is received
@@ -84,9 +61,6 @@ func main() {
 
 // to start service
 func startServer(router *gin.Engine) {
-	/*
-		DEFINITION : // Start the HTTP server to listen for incoming API requests on the registered routes.//
-	*/
 	server := &http.Server{
 		Addr:         constants.PORT,
 		Handler:      router,
@@ -106,7 +80,6 @@ func startServer(router *gin.Engine) {
 	}()
 	logrus.Infof("Server listening at %s", constants.PORT)
 	Gracefullstop(server)
-
 }
 
 // to stop service gracefully
@@ -120,5 +93,4 @@ func Gracefullstop(server *http.Server) {
 	if err := server.Shutdown(ctx); err != nil {
 		logrus.Error(err)
 	}
-
 }
