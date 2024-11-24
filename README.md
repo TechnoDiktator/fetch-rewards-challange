@@ -68,42 +68,38 @@ This project includes a Makefile to streamline common tasks during development. 
 
 - **`run`**  
 
-  **Command:**  
+  
   ```sh
   make run
 - **`tidy`**  
 
-  **Command:**  
   ```sh
   make tidy
 - **`test`**  
  
-  **Command:**  
+  
   ```sh
   make test
 - **`build`**  
 
-  **Command:**  
+ 
   ```sh
   make docker-build
 - **`docker run`**  
 
-  **Command:**  
+ 
   ```sh
   make docker-run
 - **`docker stop`**  
 
-  **Command:**  
+ 
   ```sh
   make docker-stop
 
 - **`docker restart`**  
-
-  **Command:**  
+ 
   ```sh
   make docker-restart
-
-
 ## Future Improvements
    - Persisting data in a database (optional as per assignment).
    - Adding more unit tests for edge cases.
