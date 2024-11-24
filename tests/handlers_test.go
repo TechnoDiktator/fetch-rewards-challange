@@ -13,10 +13,14 @@ import (
 	"testing"
 )
 
+// TestProcessReceipt_Success tests the successful processing of a receipt.
+// This test sends a POST request to the /receipts/process endpoint with valid JSON data.
+// It expects a 200 OK status code and a response body containing an 'id' field.
 func TestProcessReceipt_Success(t *testing.T) {
 	// Setup
-
 	logger.InitializeLogger()
+	logger.Log.Info("=========================================================================")
+	logger.Log.Info()
 	gin.SetMode(gin.TestMode) // Use test mode to disable logging
 	router := gin.Default()
 	receiptService := setupService()
@@ -70,12 +74,18 @@ func TestProcessReceipt_Success(t *testing.T) {
 
 	// You can also check the response body if needed
 	assert.Contains(t, w.Body.String(), "id")
+	logger.Log.Info("=========================================================================")
+	logger.Log.Info()
 }
 
+// TestProcessReceipt_InvalidJSON tests the handling of invalid JSON data.
+// This test sends a POST request to the /receipts/process endpoint with malformed JSON.
+// It expects a 400 Bad Request status code and an error message in the response body.
 func TestProcessReceipt_InvalidJSON(t *testing.T) {
 	//declare logger
 	logger.InitializeLogger()
-
+	logger.Log.Info("=========================================================================")
+	logger.Log.Info()
 	// Setup
 	gin.SetMode(gin.TestMode)
 	router := gin.Default()
@@ -106,4 +116,7 @@ func TestProcessReceipt_InvalidJSON(t *testing.T) {
 
 	// Check if error message is in the response body
 	assert.Contains(t, w.Body.String(), "error")
+
+	logger.Log.Info("=========================================================================")
+	logger.Log.Info()
 }
