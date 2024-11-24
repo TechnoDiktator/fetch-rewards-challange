@@ -46,6 +46,14 @@ git checkout master
 
 ---
 
+
+### Additions to the README (Makefile):
+- **Makefile Commands**: Descriptions for each command (`run`, `test`, `fmt`, `tidy`, `clean`, `docker-build`, `docker-run`, `swagger`) to help users build, test, and run the project with ease.
+- **API Endpoints**: Detailed API endpoint documentation for processing receipts and fetching points.
+
+
+
+
 ## Future Improvements
    - Persisting data in a database (optional as per assignment).
    - Adding more unit tests for edge cases.
