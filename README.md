@@ -4,9 +4,9 @@ Assignment For The Fetch Rewards Challange (RECEIPT PROCESSOR)
 
 ---
 ## Tarang Rastogi (rastogitarang5@gmail.com)
-## Portfolio (https://technodiktator.github.io/portfolio/)()
-## LinkedIn (https://www.linkedin.com/in/tarang-rastogi-667397179/)
-## LeetCode (https://leetcode.com/u/rastogitarang/)
+## Portfolio ( https://technodiktator.github.io/portfolio/ )
+## LinkedIn ( https://www.linkedin.com/in/tarang-rastogi-667397179/ )
+## LeetCode ( https://leetcode.com/u/rastogitarang/ )
 ---
 
 # Receipt Processor API - Assignment Documentation
